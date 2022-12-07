@@ -4,7 +4,7 @@ name: client
 on:
   push:
     branches:
-      - main # 브랜치 명
+      - reference # 브랜치 명
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -13,11 +13,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: npm install
-        working-directory: ./my-app-client
+        working-directory: ./my-agora-states-client
 # 2. Webpack을 이용해 빌드를 진행하고
       - name: Build
         run: npm run build
-        working-directory: ./my-app-client
+        working-directory: ./my-agora-states-client
 # 3. Deploy: s3로 빌드 결과를 업로드한다.
       - name: SHOW AWS CLI VERSION
         env:
@@ -36,4 +36,4 @@ jobs:
             --region ap-northeast-2 \
             build s3://fe-75-ymymmz9-s3 \
             --delete
-        working-directory: ./my-app-client
+        working-directory: ./my-agora-states-client
